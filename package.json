@@ -1,0 +1,9 @@
+{
+  "name": "tr-tools",
+  "version": "1.0.0",
+  "description": "Shared React UI components and utilities for WordPress Gutenberg plugins",
+  "main": "index.js",
+  "module": "index.js",
+  "author": "Tomor Roy",
+  "license": "GPL-3.0-or-later"
+}

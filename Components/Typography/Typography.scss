@@ -1,0 +1,163 @@
+.tr-typography-control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+
+  &__label {
+    // font-weight: 500;
+    font-size: 13px;
+    color: #1e293b;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__trigger-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover,
+    &.active {
+      border-color: #3b82f6;
+      color: #3b82f6;
+      background: #eff6ff;
+    }
+  }
+
+  &__reset-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: #949494;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    transition: color 0.15s ease, background-color 0.15s ease, transform 0.2s ease;
+
+    &:hover {
+      color: #475569;
+      background-color: #f1f5f9;
+      transform: rotate(-45deg);
+    }
+  }
+
+  &__popover {
+    padding: 16px;
+    background: #ffffff;
+    border-radius: 8px;
+    width: 280px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e5e7eb;
+
+    .components-range-control {
+      margin-bottom: 14px;
+    }
+
+    .components-select-control {
+      margin-bottom: 14px;
+    }
+  }
+
+  &__field {
+    margin-bottom: 14px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__field-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 499;
+    text-transform: uppercase;
+    color: #1e1e1e;
+    margin-bottom: 6px;
+  }
+
+  &__btn-group {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: #f1f5f9;
+    padding: 3px;
+    border-radius: 6px;
+  }
+
+  &__option-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 8px;
+    border: none;
+    background: transparent;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+      color: #1e293b;
+    }
+
+    &.active {
+      background: #F62477;
+      color: #ffffff;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      font-weight: 600;
+    }
+  }
+}
+
+// Override WordPress UnitControl button background
+.tr-custom-unit-control {
+  select,
+  button,
+  .components-button,
+  .components-custom-select-control__button,
+  .components-unit-control__select {
+    background-color: #F62477 !important;
+    color: white !important;
+    border-color: #F62477 !important;
+    text-align: center !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding-left: 4px !important;
+    padding-right: 4px !important;
+    outline: none !important;
+    box-shadow: none !important;
+    min-width: 32px !important;
+
+    &:focus, &:focus-visible, &:active {
+      outline: none !important;
+      box-shadow: none !important;
+      border-color: #F62477 !important;
+    }
+  }
+
+  // Some WP versions wrap the select in another div that might carry the border/background
+  .components-custom-select-control {
+    background-color: transparent !important;
+  }
+}

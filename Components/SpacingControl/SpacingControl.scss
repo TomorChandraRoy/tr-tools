@@ -1,0 +1,127 @@
+.bPlBoxControl {
+  margin-bottom: 20px;
+}
+
+.bPlBoxControl .tr-spacing-control-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.bPlBoxControl .tr-spacing-control-label {
+  display: block;
+  font-size: 13px;
+  // font-weight: 500;
+  color: #1e293b;
+  margin-bottom: 0;
+}
+
+.bPlBoxControl .tr-spacing-reset-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #757575;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.bPlBoxControl .tr-spacing-reset-btn:hover {
+  color: #1e293b;
+}
+
+.bPlBoxControl .tr-spacing-reset-btn .dashicons {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+.bPlBoxControl .sides {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.bPlBoxControl .sides.gap {
+  gap: 8px;
+}
+
+.bPlBoxControl .bplUnitControlWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.bPlBoxControl .bplUnitControlWrapper .components-base-control__field {
+  margin-bottom: 0;
+}
+
+/* Override UnitControl borders to attach them */
+.bPlBoxControl .bplUnitControlWrapper .components-input-control__container {
+  border-radius: 0;
+  width: 100%;
+  min-width: 0;
+}
+
+.bPlBoxControl .bplUnitControlWrapper .components-input-control__input {
+  min-width: 0;
+  width: 100%;
+  padding: 0 2px 0 6px;
+  text-align: center;
+  -moz-appearance: textfield;
+}
+
+.bPlBoxControl .bplUnitControlWrapper .components-input-control__input::-webkit-outer-spin-button,
+.bPlBoxControl .bplUnitControlWrapper .components-input-control__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.bPlBoxControl .bplUnitControlWrapper:first-child .components-input-control__container {
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.bPlBoxControl .bplUnitControlWrapper:not(:first-child) .components-input-control__container {
+  border-left: none;
+}
+
+.bPlBoxControl .sideLabel {
+  font-size: 11px;
+  color: #1e293b;
+  margin-top: 4px;
+  text-transform: capitalize;
+}
+
+.bPlBoxControl .bplBoxControlLinkButton {
+  height: 32px;
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #757575;
+  border-left: none;
+  background: transparent;
+  cursor: pointer;
+  color: #1e293b;
+}
+
+.bPlBoxControl .bplBoxControlLinkButton:last-child {
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+.bPlBoxControl .bplBoxControlLinkButton:hover {
+  background: #f1f5f9;
+}
+
+.bPlBoxControl .bplBoxControlLinkButton .dashicons {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
