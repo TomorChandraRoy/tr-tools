@@ -1,0 +1,18 @@
+.gbb-media-control {
+  margin-bottom: 20px;
+
+  .components-base-control {
+    margin-bottom: 8px;
+  }
+
+  .gbb-media-control__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .components-button {
+      height: 30px;
+      line-height: 1;
+    }
+  }
+}

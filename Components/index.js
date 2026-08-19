@@ -10,3 +10,5 @@ export { default as UnitControl } from "./UnitControl/UnitControl";
 export { default as BorderControl, DEFAULT_BORDER } from "./BorderControl/BorderControl";
 export { default as SpacingControl } from "./SpacingControl/SpacingControl";
 export { default as DocsLink } from "./DocsLink/DocsLink";
+export { default as MediaControl } from "./MediaControl/MediaControl";
+
