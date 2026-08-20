@@ -71,6 +71,15 @@
     .components-select-control {
       margin-bottom: 14px;
     }
+    label,
+    .components-base-control__label,
+    .components-input-control__label {
+      font-size: 11px !important;
+      font-weight: 499 !important;
+      text-transform: uppercase !important;
+      color: #1e1e1e !important;
+      margin-bottom: 6px !important;
+    }
   }
 
   &__field {
@@ -83,11 +92,11 @@
 
   &__field-label {
     display: block;
-    font-size: 11px;
-    font-weight: 499;
-    text-transform: uppercase;
-    color: #1e1e1e;
-    margin-bottom: 6px;
+    font-size: 11px !important;
+    font-weight: 499 !important;
+    text-transform: uppercase !important;
+    color: #1e1e1e !important;
+    margin-bottom: 6px !important;
   }
 
   &__btn-group {
@@ -127,37 +136,3 @@
   }
 }
 
-// Override WordPress UnitControl button background
-.tr-custom-unit-control {
-  select,
-  button,
-  .components-button,
-  .components-custom-select-control__button,
-  .components-unit-control__select {
-    background-color: #F62477 !important;
-    color: white !important;
-    border-color: #F62477 !important;
-    text-align: center !important;
-    font-size: 11px !important;
-    font-weight: 500 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    padding-left: 4px !important;
-    padding-right: 4px !important;
-    outline: none !important;
-    box-shadow: none !important;
-    min-width: 32px !important;
-
-    &:focus, &:focus-visible, &:active {
-      outline: none !important;
-      box-shadow: none !important;
-      border-color: #F62477 !important;
-    }
-  }
-
-  // Some WP versions wrap the select in another div that might carry the border/background
-  .components-custom-select-control {
-    background-color: transparent !important;
-  }
-}
