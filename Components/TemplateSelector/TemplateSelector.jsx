@@ -1,7 +1,7 @@
 import { __ } from "@wordpress/i18n";
 import { useState } from "@wordpress/element";
 import ReadyPatternsModal from "./ReadyPatternsModal";
-import "./TemplateSelector.scss";
+import "./TemplateSelector.scss";      
 
 const TemplateSelector = ({setAttributes,title,subtitle,templates = [],isPro,proTemplates,}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
