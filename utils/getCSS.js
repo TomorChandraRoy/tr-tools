@@ -141,3 +141,21 @@ export const getBorderCss = (border) => {
     return sides.map(s => `border-${s}: ${borderValue};`).join(' ');
   }
 };
+
+/**
+ * Helper function to generate CSS string for shadow
+ * @param {Object} shadowObj - Shadow value object
+ * @returns {string} CSS shadow string
+ */
+export const getShadowCss = (shadowObj) => {
+  if (!shadowObj) return '';
+  // Since DEFAULT_SHADOW is in ShadowControl.js, we define defaults inline here
+  const hOffset = shadowObj.hOffset || '0px';
+  const vOffset = shadowObj.vOffset || '0px';
+  const blur = shadowObj.blur || '0px';
+  const spread = shadowObj.spread || '0px';
+  const color = shadowObj.color;
+  
+  if (!color) return '';
+  return `${hOffset} ${vOffset} ${blur} ${spread} ${color}`;
+};

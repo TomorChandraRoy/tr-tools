@@ -73,8 +73,13 @@
 
 .tr-custom-unit-control .components-input-control__container,
 .tr-custom-unit-control .components-input-control__backdrop,
-.tr-custom-unit-control .components-input-control__input,
 .tr-custom-unit-control .components-input-control__suffix {
   min-height: 32px !important;
   height: 32px !important;
+}
+
+.tr-custom-unit-control .components-input-control__input {
+  min-height: 32px !important;
+  height: 32px !important;
+  padding-left: 4px !important;
 }

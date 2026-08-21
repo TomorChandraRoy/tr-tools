@@ -72,8 +72,9 @@
 .bPlBoxControl .bplUnitControlWrapper .components-input-control__input {
   min-width: 0;
   width: 100%;
-  padding: 0 2px 0 6px;
-  text-align: center;
+  padding: 0 2px 0 4px !important;
+  text-align: left !important;
+  font-size: 12px !important;
   -moz-appearance: textfield;
 }
 
@@ -86,6 +87,18 @@
 .bPlBoxControl .bplUnitControlWrapper:first-child .components-input-control__container {
   border-top-left-radius: 2px;
   border-bottom-left-radius: 2px;
+}
+
+/* Reduce suffix size to give input more space */
+.bPlBoxControl .bplUnitControlWrapper select,
+.bPlBoxControl .bplUnitControlWrapper button,
+.bPlBoxControl .bplUnitControlWrapper .components-button,
+.bPlBoxControl .bplUnitControlWrapper .components-custom-select-control__button,
+.bPlBoxControl .bplUnitControlWrapper .components-unit-control__select,
+.bPlBoxControl .bplUnitControlWrapper .components-unit-control__unit-label {
+  padding-left: 2px !important;
+  padding-right: 2px !important;
+  min-width: 18px !important;
 }
 
 .bPlBoxControl .bplUnitControlWrapper:not(:first-child) .components-input-control__container {

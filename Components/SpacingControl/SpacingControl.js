@@ -1,17 +1,19 @@
 import { __experimentalUnitControl as UnitControl } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
+import Devices from '../Devices/Devices';
 import './SpacingControl.scss';
 
 const SpacingControl = (props) => {
-	const { label, value, onChange = () => { }, defaultVal, units, sides, style, className = '', disableUnits = false } = props;
+	const { label, value, onChange = () => { }, defaultVal, units, sides, style, className = '', disableUnits = false, responsive = false } = props;
 	const [link, setLink] = useState(true);
+	const [device, setDevice] = useState("desktop");
 
 	const unitSides = sides || ['top', 'right', 'bottom', 'left'];
 
     const getParsedValue = (val) => {
         if (!val) return { top: '', right: '', bottom: '', left: '' };
-        if (typeof val === 'object') return { top: val.top || '', right: val.right || '', bottom: val.bottom || '', left: val.left || '' };
+        if (typeof val === 'object' && !val.desktop && !val.tablet && !val.mobile) return { top: val.top || '', right: val.right || '', bottom: val.bottom || '', left: val.left || '' };
         if (typeof val === 'string') {
             const parts = val.split(' ').map(p => p.trim()).filter(Boolean);
             if (parts.length === 1) return { top: parts[0], right: parts[0], bottom: parts[0], left: parts[0] };
@@ -23,9 +25,10 @@ const SpacingControl = (props) => {
     };
 
     const parsedDefault = getParsedValue(defaultVal);
-    const currentVal = value ? getParsedValue(value) : parsedDefault;
+    const currentValueToParse = responsive ? value?.[device] : value;
+    const currentVal = currentValueToParse ? getParsedValue(currentValueToParse) : parsedDefault;
 
-	const isReset = value !== undefined && value !== '' && 
+	const isReset = currentValueToParse !== undefined && currentValueToParse !== '' && 
       (currentVal.top !== parsedDefault.top || 
        currentVal.right !== parsedDefault.right || 
        currentVal.bottom !== parsedDefault.bottom || 
@@ -57,19 +60,37 @@ const SpacingControl = (props) => {
         const b = newVal.bottom || '';
         const l = newVal.left || '';
 
+        let finalStr;
         if (!t && !r && !b && !l) {
-            onChange(undefined);
+            finalStr = undefined;
         } else {
-            onChange(`${t || '0px'} ${r || '0px'} ${b || '0px'} ${l || '0px'}`);
+            finalStr = `${t || '0px'} ${r || '0px'} ${b || '0px'} ${l || '0px'}`;
+        }
+
+        if (responsive) {
+            onChange({ ...(typeof value === "object" ? value : {}), [device]: finalStr });
+        } else {
+            onChange(finalStr);
         }
 	}
+
+	const handleReset = () => {
+        if (responsive) {
+            onChange({ ...(typeof value === "object" ? value : {}), [device]: undefined });
+        } else {
+            onChange(undefined);
+        }
+    };
 
 	return (
         <div style={{ ...style }} className={`bPlBoxControl ${className}`}>
             <div className="tr-spacing-control-header">
-                {label && <span className="tr-spacing-control-label">{label}</span>}
+                <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                    {label && <span className="tr-spacing-control-label">{label}</span>}
+                    {responsive && <Devices device={device} onChange={setDevice} />}
+                </div>
                 {isReset && (
-                    <button className='tr-spacing-reset-btn' onClick={() => onChange(undefined)} title={__('Reset', 'guten-builder-blocks')}>
+                    <button className='tr-spacing-reset-btn' onClick={handleReset} title={__('Reset', 'guten-builder-blocks')}>
                         <span className='dashicons dashicons-image-rotate'></span>
                     </button>
                 )}
