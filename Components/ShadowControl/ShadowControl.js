@@ -11,14 +11,28 @@ export const DEFAULT_SHADOW = {
   color: ''
 };
 
-const ShadowControl = ({ label = __('Box Shadow', 'guten-builder-blocks'), value, onChange, defaultShadow }) => {
-  const currentVal = { ...DEFAULT_SHADOW, ...defaultShadow, ...value };
-
-  const updateField = (field, val) => {
-    onChange({ ...currentVal, [field]: val });
+const ShadowControl = ({
+  label = __('Box Shadow', 'guten-builder-blocks'),
+  value,
+  onChange,
+  defaultShadow,
+  defaultValue,
+  defaultVal,
+}) => {
+  const fallback = defaultShadow || defaultValue || defaultVal;
+  const currentVal = {
+    ...DEFAULT_SHADOW,
+    ...fallback,
+    ...(typeof value === 'object' && value !== null ? value : {}),
   };
 
-  const resetVal = { ...DEFAULT_SHADOW, ...defaultShadow };
+  const updateField = (field, val) => {
+    if (onChange) {
+      onChange({ ...currentVal, [field]: val });
+    }
+  };
+
+  const resetVal = { ...DEFAULT_SHADOW, ...fallback };
   const isChanged = value && typeof value === 'object' && Object.keys(value).some(key => value[key] !== resetVal[key]);
 
   const handleReset = () => {

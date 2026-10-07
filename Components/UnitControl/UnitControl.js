@@ -22,7 +22,7 @@ const UnitControl = ({
 
   const currentValue = responsive ? value?.[device] || "" : value;
   const currentDefault = responsive && typeof defaultVal === 'object' ? defaultVal?.[device] || "" : defaultVal;
-  
+
   const showReset =
     currentValue !== undefined &&
     currentValue !== "" &&
@@ -64,7 +64,6 @@ const UnitControl = ({
               <span
                 style={{
                   fontSize: "13px",
-                  fontWeight: 500,
                   color: "#1e293b",
                   whiteSpace: "nowrap",
                 }}

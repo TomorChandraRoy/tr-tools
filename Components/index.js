@@ -12,4 +12,4 @@ export { default as SpacingControl } from "./SpacingControl/SpacingControl";
 export { default as DocsLink } from "./DocsLink/DocsLink";
 export { default as MediaControl } from "./MediaControl/MediaControl";
 export { default as ShadowControl, DEFAULT_SHADOW } from "./ShadowControl/ShadowControl";
-
+export { default as IconControl, RenderIcon } from "./IconControl/IconControl";

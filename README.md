@@ -1,59 +1,59 @@
 # 🛠️ tr-tools
 
-> **WordPress Gutenberg Blocks-এর জন্য Shared React UI Components & Utilities Library**
+> **Shared React UI Components & Utilities Library for WordPress Gutenberg Blocks**
 
-`tr-tools` হলো একটি শেয়ার্ড কম্পোনেন্ট লাইব্রেরি, যা বিভিন্ন ওয়ার্ডপ্রেস গুটেনবার্গ ব্লক প্লাগিনে ব্যবহারের জন্য রিইউজেবল (Reusable) React UI Components এবং Utilities সরবরাহ করে।
-
----
-
-## 📌 সূচিপত্র (Table of Contents)
-
-1. [ফোল্ডার লোকেশন (Folder Location)](#-ফোল্ডার-লোকেশন-folder-location)
-2. [নতুন প্লাগিনে ইন্সটলেশন ও কনফিগারেশন (Setup)](#-নতুন-প্লাগিনে-ইন্সটলেশন-ও-কনফিগারেশন-setup)
-3. [কম্পোনেন্ট ডকুমেন্টেশন ডিরেক্টরি (Component Documentation)](#-কম্পোনেন্ট-ডকুমেন্টেশন-ডিরেক্টরি-component-documentation)
-4. [নতুন কম্পোনেন্ট যুক্ত করার নিয়ম (Adding New Components)](#-নতুন-কম্পোনেন্ট-যুক্ত-করার-নিয়ম-adding-new-components)
-5. [ফোল্ডার স্ট্রাকচার (Folder Structure)](#-ফোল্ডার-স্ট্রাকচার-folder-structure)
+`tr-tools` is a shared component library that provides reusable React UI Components and Utilities designed for use in various WordPress Gutenberg block plugins.
 
 ---
 
-## 📁 ফোল্ডার লোকেশন (Folder Location)
+## 📌 Table of Contents
 
-`tr-tools` ফোল্ডারটি আপনার ওয়ার্ডপ্রেস সাইটের **`wp-content/plugins/`** ফোল্ডারের ভেতর অন্যান্য সমস্ত প্লাগিনের পাশাপাশি (Sibling directory হিসেবে) রাখতে হবে:
+1. [Folder Location](#-folder-location)
+2. [Installation & Configuration (Setup)](#-installation--configuration-setup)
+3. [Component Documentation Directory](#-component-documentation-directory)
+4. [Adding New Components](#-adding-new-components)
+5. [Folder Structure](#-folder-structure)
+
+---
+
+## 📁 Folder Location
+
+The `tr-tools` folder must be placed inside your WordPress site's **`wp-content/plugins/`** directory, alongside your other plugins (as a sibling directory):
 
 ```text
 wp-content/plugins/
-├── tr-tools/                 <-- (শেয়ার্ড লাইব্রেরি ফোল্ডার - এখানে থাকবে)
-├── guten-builder-blocks/     <-- (প্লাগিন ১)
-├── my-new-block-plugin/      <-- (প্লাগিন ২)
-└── another-plugin/           <-- (প্লাগিন ৩)
+├── tr-tools/                 <-- (Shared library folder - Place here)
+├── guten-builder-blocks/     <-- (Plugin 1)
+├── my-new-block-plugin/      <-- (Plugin 2)
+└── another-plugin/           <-- (Plugin 3)
 ```
 
-> 💡 **নোট:** কারণ প্লাগিনের `package.json`-এ `"tr-tools": "file:../tr-tools"` লেখা থাকে। `../tr-tools` মানে হলো প্রজেক্টের ঠিক ১ ধাপ বাইরে `wp-content/plugins/` ফোল্ডারে `tr-tools` রাখা থাকতে হবে।
+> 💡 **Note:** This is required because the plugin's `webpack.config.js` uses an alias resolving to `'../tr-tools'`. The `../tr-tools` path expects `tr-tools` to be located exactly one level up, inside the `wp-content/plugins/` folder.
 
 ---
 
-## 🚀 নতুন প্লাগিনে ইন্সটলেশন ও কনফিগারেশন (Setup)
+## 🚀 Installation & Configuration (Setup)
 
-যেকোনো ওয়ার্ডপ্রেস প্লাগিনে (যেমন `guten-builder-blocks`) `tr-tools` এর কম্পোনেন্টগুলো ব্যবহার করতে নিচের ধাপ দুটি অনুসরণ করুন:
+To use the components from `tr-tools` in any WordPress plugin (e.g., `xpo-blocks`), follow these steps:
 
-### ধাপ ১: প্লাগিনের `package.json`-এ যোগ করুন
-আপনার প্লাগিনের `package.json` ফাইলের `dependencies` সেকশনে `tr-tools` কে স্থানীয় ফাইল হিসেবে যুক্ত করুন:
+### Step 1: Add Webpack Alias
+Open your plugin's `webpack.config.js` file and add the `tr-tools` alias under the `resolve` settings so that Webpack knows where to find the shared components:
 
-```json
-"dependencies": {
-  "tr-tools": "file:../tr-tools"
-}
+```javascript
+module.exports = {
+  ...defaultConfig,
+  resolve: {
+    ...defaultConfig.resolve,
+    alias: {
+      ...(defaultConfig.resolve ? defaultConfig.resolve.alias : {}),
+      'tr-tools': path.resolve(__dirname, '../tr-tools'),
+    },
+  },
+};
 ```
 
-### ধাপ ২: NPM Install চালান
-আপনার প্লাগিনের ফোল্ডারে টার্মিনাল খুলে নিচের কমান্ডটি চালান:
-
-```bash
-npm install
-```
-
-### ধাপ ৩: (ঐচ্ছিক কিন্তু সুনির্দিষ্ট) `jsconfig.json` যোগ করুন
-VS Code-এ `tr-tools`-এর কম্পোনেন্টগুলোর মসৃণ **Auto-Import** এবং টাইপ সাজেশন পেতে আপনার নতুন প্লাগিনের রুট ফোল্ডারে একটি `jsconfig.json` ফাইল রাখুন:
+### Step 3: (Optional but Recommended) Add `jsconfig.json`
+For smooth **Auto-Import** and type suggestions of `tr-tools` components in VS Code, place a `jsconfig.json` file in the root folder of your new plugin:
 
 ```json
 {
@@ -69,42 +69,42 @@ VS Code-এ `tr-tools`-এর কম্পোনেন্টগুলোর ম�
 
 ---
 
-## 📘 কম্পোনেন্ট ডকুমেন্টেশন ডিরেক্টরি (Component Documentation)
+## 📘 Component Documentation Directory
 
-প্রত্যেকটি কম্পোনেন্টের বিস্তারিত প্রপস গাইড ও ব্যবহারের উদাহরণের জন্য নিচের লিঙ্কগুলোতে ক্লিক করুন:
+Click on the links below for detailed prop guides and usage examples for each component:
 
-1. 🎨 **[TemplateSelector Documentation](file:///c:/Users/USER/Local%20Sites/production/app/public/wp-content/plugins/tr-tools/Components/TemplateSelector/README.md)**
-   - রেডিমেড লেআউট বা ডেমো টেমপ্লেট পছন্দ করার UI।
-2. 📋 **[ItemsPanel Documentation](file:///c:/Users/USER/Local%20Sites/production/app/public/wp-content/plugins/tr-tools/Components/ItemsPanel/README.md)**
-   - গুটেনবার্গ ব্লকে একের অধিক আইটেম/লিস্ট ম্যানেজ করার জন্য (Add/Edit/Delete/Reorder)।
-3. 🔘 **[TabButton Documentation](file:///c:/Users/USER/Local%20Sites/production/app/public/wp-content/plugins/tr-tools/Components/TabButton/README.md)**
-   - কাস্টম পিল/সুইচ বাটন ট্যাব ইন্টারফেসের জন্য (General vs Style ইত্যাদি)।
+1. 🎨 **[TemplateSelector Documentation](Components/TemplateSelector/README.md)**
+   - UI for selecting pre-made layouts or demo templates.
+2. 📋 **[ItemsPanel Documentation](Components/ItemsPanel/README.md)**
+   - For managing multiple items/lists inside a Gutenberg block (Add/Edit/Delete/Reorder).
+3. 🔘 **[TabButton Documentation](Components/TabButton/README.md)**
+   - For creating custom pill/switch button tab interfaces (e.g., General vs Style).
 
 ---
 
-## ➕ নতুন কম্পোনেন্ট যুক্ত করার নিয়ম (Adding New Components)
+## ➕ Adding New Components
 
-আপনি যদি ভবিষ্যতে `tr-tools`-এ নতুন কোনো UI কম্পোনেন্ট (যেমন: Custom Color Picker, Range Control, Modal) যোগ করতে চান:
+If you want to add a new UI component (e.g., Custom Color Picker, Range Control, Modal) to `tr-tools` in the future:
 
-1. **ফোল্ডার তৈরি করুন:** `tr-tools/Components/` ফোল্ডারের ভেতর আপনার নতুন কম্পোনেন্টের নামে ফোল্ডার তৈরি করে ফাইল ও তার নিজস্ব `README.md` রাখুন।  
-   *উদাহরণ:* `tr-tools/Components/ColorPicker/ColorPicker.jsx`
+1. **Create a Folder:** Create a folder named after your new component inside the `tr-tools/Components/` directory and place the component file and its own `README.md` inside it.
+   *Example:* `tr-tools/Components/ColorPicker/ColorPicker.jsx`
 
-2. **`Components/index.js`-এ এক্সপোর্ট করুন:**  
-   [tr-tools/Components/index.js](file:///c:/Users/USER/Local%20Sites/production/app/public/wp-content/plugins/tr-tools/Components/index.js) ফাইলে গিয়ে আপনার কম্পোনেন্টটি এক্সপোর্ট যোগ করে দিন:
+2. **Export in `Components/index.js`:**
+   Open the `tr-tools/Components/index.js` file and add the export for your component:
 
    ```javascript
    export { default as ColorPicker } from './ColorPicker/ColorPicker';
    ```
 
-3. **`index.d.ts`-এ যোগ করুন:**  
-   [tr-tools/index.d.ts](file:///c:/Users/USER/Local%20Sites/production/app/public/wp-content/plugins/tr-tools/index.d.ts) ফাইলে Auto-Import এর জন্য টাইপ এক্সপোর্ট ডিক্লেয়ার করে দিন:
+3. **Add to `index.d.ts`:**
+   Declare the type export in the `tr-tools/index.d.ts` file to enable Auto-Import:
    ```typescript
    export const ColorPicker: ComponentType<any>;
    ```
 
 ---
 
-## 📂 ফোল্ডার স্ট্রাকচার (Folder Structure)
+## 📂 Folder Structure
 
 ```text
 tr-tools/
@@ -112,21 +112,32 @@ tr-tools/
 │   ├── TemplateSelector/
 │   │   ├── TemplateSelector.jsx
 │   │   ├── TemplateSelector.scss
-│   │   └── README.md            <-- (TemplateSelector-এর বিস্তারিত গাইড)
+│   │   └── README.md            <-- (Detailed guide for TemplateSelector)
 │   ├── ItemsPanel/
 │   │   ├── ItemsPanel.jsx
 │   │   ├── ItemsPanel.scss
-│   │   └── README.md            <-- (ItemsPanel-এর বিস্তারিত গাইড)
+│   │   └── README.md            <-- (Detailed guide for ItemsPanel)
 │   ├── TabButton/
 │   │   ├── TabButton.jsx
 │   │   ├── TabButton.scss
-│   │   └── README.md            <-- (TabButton-এর বিস্তারিত গাইড)
-│   └── index.js                 <-- (সব কম্পোনেন্টের এক্সপোর্ট হাব)
+│   │   └── README.md            <-- (Detailed guide for TabButton)
+│   └── index.js                 <-- (Export hub for all components)
 ├── index.js                     <-- (Main Root Entry Point)
 ├── index.d.ts                   <-- (TypeScript & Auto-Import Definitions)
 ├── package.json                 <-- (Package Metadata)
-└── README.md                    <-- (প্রধান নির্দেশিকা)
+└── README.md                    <-- (Main guidelines)
 ```
+
+---
+
+## ⚖️ License & Copyright Notice
+
+This library is open-source and released under the **[GPL-3.0-or-later License](https://www.gnu.org/licenses/gpl-3.0.txt)**. 
+
+While you are free to clone, modify, and use this code in your own projects, **you must adhere to the following rules:**
+1. **Preserve Copyright:** You are strictly prohibited from removing or modifying the original `@copyright` and `@author` notices inside the source code files.
+2. **Open Source Requirement:** If you modify and distribute this code publicly, your project must also be released under a compatible GPL license.
+3. **Legal Action:** Any unauthorized removal of copyright attribution or violation of the GPL terms may result in a **DMCA Takedown Notice** on platforms like GitHub, WordPress.org, or your hosting provider.
 
 ---
 

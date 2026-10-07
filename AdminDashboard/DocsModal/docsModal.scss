@@ -1,0 +1,355 @@
+/* ==========================================================================
+   Documentation Lightbox Modal & Sidebar Layout Styles
+   ========================================================================== */
+
+@keyframes fadeInDocsModal {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.docs-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999999;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: fadeInDocsModal 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+  .docs-layout-wrapper,
+  .docs-modal-container {
+    position: relative;
+    background: #ffffff;
+    width: 100%;
+    max-width: 1060px;
+    height: 85vh;
+    max-height: 780px;
+    display: flex;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+
+    /* Floating Close Button */
+    .docs-modal-close-btn {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      z-index: 50;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      color: #475569;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+      transition: all 0.2s ease;
+
+      svg {
+        display: block;
+      }
+
+      &:hover {
+        background: #ef4444;
+        color: #ffffff;
+        border-color: #ef4444;
+        transform: scale(1.08);
+      }
+    }
+
+    /* Left Sidebar Navigation */
+    .docs-sidebar {
+      width: 270px;
+      background: #f8fafc;
+      border-right: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+
+      .sidebar-header {
+        padding: 20px 24px;
+        border-bottom: 1px solid #e2e8f0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        .sidebar-brand-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #2563eb;
+        }
+
+        .sidebar-brand-title {
+          font-size: 16px;
+          font-weight: 700;
+          color: #0f172a;
+        }
+      }
+
+      .sidebar-nav {
+        flex: 1;
+        padding: 20px 16px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .nav-group {
+          .nav-group-header-btn {
+            width: 100%;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            padding: 6px 10px;
+            margin-bottom: 6px;
+            font-size: 12.5px;
+            font-weight: 700;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-transform: capitalize;
+            border-radius: 6px;
+            transition: background 0.15s ease;
+
+            &:hover {
+              background: #f1f5f9;
+            }
+
+            .group-arrow {
+              color: #64748b;
+              display: block;
+              transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+              transform: rotate(-90deg);
+
+              &.open {
+                transform: rotate(0deg);
+              }
+            }
+          }
+
+          .nav-items-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+
+            li {
+              .nav-item-btn {
+                width: 100%;
+                text-align: left;
+                background: transparent;
+                border: none;
+                padding: 8px 12px;
+                border-radius: 8px;
+                font-size: 13.5px;
+                font-weight: 500;
+                color: #475569;
+                cursor: pointer;
+                transition: all 0.15s ease;
+
+                &:hover {
+                  background: #f1f5f9;
+                  color: #0f172a;
+                }
+
+                &.active {
+                  background: #e0e7ff;
+                  color: #1d4ed8;
+                  font-weight: 700;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    /* Right Main Content Area */
+    .docs-main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      overflow: hidden;
+
+      /* Breadcrumb Header Bar */
+      .docs-breadcrumb-bar {
+        padding: 18px 28px;
+        border-bottom: 1px solid #f1f5f9;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13.5px;
+        background: #ffffff;
+
+        .home-icon {
+          color: #64748b;
+          display: block;
+          margin-right: 2px;
+        }
+
+        .breadcrumb-sep {
+          color: #cbd5e1;
+        }
+
+        .breadcrumb-link {
+          color: #64748b;
+          font-weight: 500;
+        }
+
+        .breadcrumb-current {
+          color: #0f172a;
+          font-weight: 700;
+        }
+      }
+
+      /* Content Scroll Body */
+      .docs-content-body {
+        flex: 1;
+        padding: 32px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+
+        .content-title-section {
+          .docs-type-badge {
+            display: inline-block;
+            font-size: 10.5px;
+            font-weight: 800;
+            background: #eff6ff;
+            color: #2563eb;
+            padding: 4px 10px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+          }
+
+          .docs-title-heading {
+            margin: 0 0 10px;
+            font-size: 26px;
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: -0.5px;
+          }
+
+          .docs-summary-lead {
+            font-size: 14.5px;
+            color: #475569;
+            line-height: 1.6;
+            margin: 0 0 8px;
+          }
+
+          .docs-details-text {
+            font-size: 13.5px;
+            color: #64748b;
+            line-height: 1.5;
+            margin: 0;
+          }
+        }
+
+
+
+        /* Detail Sections */
+        .docs-detail-section {
+          h3 {
+            font-size: 17px;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 0 0 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+          }
+
+          .docs-features-grid {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+
+            li {
+              display: flex;
+              align-items: flex-start;
+              gap: 10px;
+              background: #f8fafc;
+              border: 1px solid #e2e8f0;
+              padding: 12px 16px;
+              border-radius: 8px;
+              font-size: 13.5px;
+              color: #334155;
+
+              .feature-check {
+                color: #10b981;
+                font-weight: 800;
+                font-size: 14px;
+              }
+            }
+          }
+
+          .docs-steps-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            li {
+              display: flex;
+              align-items: flex-start;
+              gap: 14px;
+              background: #f8fafc;
+              border: 1px solid #e2e8f0;
+              padding: 12px 16px;
+              border-radius: 8px;
+
+              .step-badge {
+                width: 22px;
+                height: 22px;
+                background: #2563eb;
+                color: #ffffff;
+                border-radius: 50%;
+                font-size: 11px;
+                font-weight: 800;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+                margin-top: 1px;
+              }
+
+              .step-desc {
+                font-size: 13.5px;
+                color: #334155;
+                line-height: 1.5;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

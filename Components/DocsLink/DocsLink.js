@@ -1,4 +1,6 @@
+import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
+import DocsModal from '../../AdminDashboard/DocsModal/DocsModal';
 import './DocsLink.scss';
 
 const ExternalLinkIcon = () => (
@@ -10,17 +12,42 @@ const ExternalLinkIcon = () => (
 );
 
 const DocsLink = ({ link, text }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const getBlockKey = (url) => {
+    if (!url) return 'table-of-contents';
+    const cleanUrl = String(url).trim().replace(/\/$/, '');
+    const parts = cleanUrl.split('/');
+    return parts[parts.length - 1] || 'table-of-contents';
+  };
+
+  const blockKey = getBlockKey(link);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    setIsOpen(true);
+  };
+
   return (
-    <div className="gbb-inspector-docs-wrapper">
-      <a
-        href={link}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {text || __('Documentation', 'tr-tools')}
-        <ExternalLinkIcon />
-      </a>
-    </div>
+    <>
+      <div className="gbb-inspector-docs-wrapper">
+        <a
+          href={link || '#'}
+          onClick={handleClick}
+          style={{ cursor: 'pointer' }}
+        >
+          {text || __('Documentation', 'tr-tools')}
+          <ExternalLinkIcon />
+        </a>
+      </div>
+
+      {isOpen && (
+        <DocsModal
+          block={{ id: blockKey }}
+          onClose={() => setIsOpen(false)}
+        />
+      )}
+    </>
   );
 };
 

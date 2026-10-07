@@ -281,7 +281,7 @@ const BackgroundControl = ({
       {currentBg.type === "solid" && (
         <div className="tr-bg-control__solid-wrapper">
           <div className="tr-bg-control__row">
-            <span className="tr-bg-control__sublabel">COLOR</span>
+            <span className="tr-bg-control__sublabel">Selected Color Bg :</span>
             <Dropdown
               renderToggle={({ isOpen, onToggle }) => (
                 <button

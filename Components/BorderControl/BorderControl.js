@@ -11,14 +11,28 @@ export const DEFAULT_BORDER = {
 };
 
 
-const BorderControl = ({ label = __('Border', 'guten-builder-blocks'), value, onChange, defaultBorder }) => {
-  const currentVal = { ...DEFAULT_BORDER, ...defaultBorder, ...value };
-
-  const updateField = (field, val) => {
-    onChange({ ...currentVal, [field]: val });
+const BorderControl = ({
+  label = __('Border', 'guten-builder-blocks'),
+  value,
+  onChange,
+  defaultBorder,
+  defaultValue,
+  defaultVal,
+}) => {
+  const fallback = defaultBorder || defaultValue || defaultVal;
+  const currentVal = {
+    ...DEFAULT_BORDER,
+    ...fallback,
+    ...(typeof value === 'object' && value !== null ? value : {}),
   };
 
-  const resetVal = { ...DEFAULT_BORDER, ...defaultBorder };
+  const updateField = (field, val) => {
+    if (onChange) {
+      onChange({ ...currentVal, [field]: val });
+    }
+  };
+
+  const resetVal = { ...DEFAULT_BORDER, ...fallback };
   const isChanged = value && typeof value === 'object' && Object.keys(value).some(key => value[key] !== resetVal[key]);
 
   const handleReset = () => {

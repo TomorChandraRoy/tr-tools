@@ -1,0 +1,44 @@
+$dark-slate: #152230;
+$accent-blue: #f00069;
+
+/* Tabs Navigation */
+.guten-builder-tabs {
+	display: flex;
+	gap: 10px;
+	border-bottom: 2px solid #e2e8f0;
+
+	.tab-btn {
+		background: transparent;
+		border: none;
+		padding: 12px 12px;
+		font-size: 15px;
+		font-weight: 600;
+		color: #1d2327;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		border-bottom: 2px solid transparent;
+		margin-bottom: -2px;
+		transition: all 0.2s ease;
+		box-shadow: none;
+		outline: none;
+
+		.tab-icon {
+			stroke: currentColor;
+		}
+
+		&:hover {
+			color: $dark-slate;
+		}
+
+		&.active {
+			color: $accent-blue !important;
+			border-bottom: 2px solid $accent-blue !important;
+
+			.tab-icon {
+				stroke: $accent-blue !important;
+			}
+		}
+	}
+}

@@ -10,7 +10,7 @@ import "./ColorControl.scss";
  * @props defaultColor: default color for reset color (String)
  * @props onChange: (Function)
  * @return color (String)
-*/
+ */
 
 const DEFAULT_CUSTOM_COLORS = [
   { name: "Orange", color: "#f97316" },
@@ -20,15 +20,26 @@ const DEFAULT_CUSTOM_COLORS = [
   { name: "Gray", color: "#737373" },
 ];
 
-const ColorControl = ({label, value = "", onChange, enableAlpha = true, customColors = DEFAULT_CUSTOM_COLORS, defaultColor = "#475569" }) => {
-
-  const isChanged = Boolean(value && defaultColor && value.trim().toLowerCase() !== defaultColor.trim().toLowerCase(),);
+const ColorControl = ({
+  label,
+  value = "",
+  onChange,
+  enableAlpha = true,
+  customColors = DEFAULT_CUSTOM_COLORS,
+  defaultColor = "#475569",
+}) => {
+  const isChanged = Boolean(
+    value &&
+    typeof value === "string" &&
+    defaultColor &&
+    typeof defaultColor === "string" &&
+    value.trim().toLowerCase() !== defaultColor.trim().toLowerCase(),
+  );
 
   return (
     <div className="tr-color-control">
       {label && <span className="tr-color-control__label">{label}</span>}
       <div className="tr-color-control__actions">
-
         {isChanged && (
           <button
             type="button"
@@ -105,5 +116,3 @@ const ColorControl = ({label, value = "", onChange, enableAlpha = true, customCo
 };
 
 export default ColorControl;
-
-

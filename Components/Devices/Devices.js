@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const DesktopIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -67,9 +67,9 @@ const Devices = ({ device, onChange }) => {
 
   return (
     <div className="tr-devices-dropdown" ref={containerRef} style={{ position: 'relative' }}>
-      <button 
-        type="button" 
-        onClick={() => setIsOpen(!isOpen)} 
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
         style={btnStyle}
         title="Responsive Device"
       >
